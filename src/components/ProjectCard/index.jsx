@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from "styled-components"
 import { MyContext } from "../../context"
 
@@ -22,13 +23,13 @@ const CardBg = styled.div.attrs(props => ({
     border: 1px solid rgba(255, 255, 255, 0.06);
     padding: 32px;
     transition: border-color 0.3s ease, transform 0.3s ease;
-    cursor: default;
+    cursor: pointer;
     position: relative;
     overflow: hidden;
 
     &:hover {
         border-color: ${props => props.$borderColor};
-        transform: translateY(-4px);
+        transform: translateY(-6px);
     }
 `
 
@@ -117,8 +118,23 @@ const Link = styled.a`
     }
 `
 
+const ViewMore = styled.div`
+    margin-top: 16px;
+    text-align: center;
+    color: ${props => props.color};
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+
+    ${CardBg}:hover & {
+        opacity: 1;
+    }
+`
+
 export default function ProjectCard({ project }) {
     const { cor3 } = useContext(MyContext)
+    const navigate = useNavigate()
     const [mouse, setMouse] = useState({ x: 0, y: 0, active: false })
 
     const handleMove = (e) => {
@@ -132,6 +148,10 @@ export default function ProjectCard({ project }) {
 
     const handleLeave = () => setMouse(prev => ({ ...prev, active: false }))
 
+    const handleClick = () => {
+        navigate(`/projeto/${project.id}`)
+    }
+
     return (
         <CardBg
             $x={mouse.x}
@@ -140,6 +160,7 @@ export default function ProjectCard({ project }) {
             $borderColor={cor3}
             onMouseMove={handleMove}
             onMouseLeave={handleLeave}
+            onClick={handleClick}
         >
             <Tag color={cor3}>{project.tag}</Tag>
             <Title color="#e2e2e2">{project.title}</Title>
@@ -154,7 +175,7 @@ export default function ProjectCard({ project }) {
                     <Item key={i} color={cor3}>{h}</Item>
                 ))}
             </Highlights>
-            <Links>
+            <Links onClick={(e) => e.stopPropagation()}>
                 {project.link && (
                     <Link href={project.link} target="_blank" rel="noopener noreferrer" color={cor3}>
                         🔗 Acessar
@@ -164,6 +185,7 @@ export default function ProjectCard({ project }) {
                     💻 GitHub
                 </Link>
             </Links>
+            <ViewMore color={cor3}>📖 Ver página completa do projeto →</ViewMore>
         </CardBg>
     )
 }

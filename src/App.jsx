@@ -1,12 +1,9 @@
 import styled, { keyframes } from 'styled-components'
+import { Routes, Route } from 'react-router-dom'
 import Header from "./components/Header"
-import Hero from "./components/Hero"
-import Projects from "./components/Projects"
-import About from "./components/About"
-import Contact from "./components/Contact"
-import Footer from "./components/Footer"
-import { useContext, useEffect } from 'react'
-import { MyContext } from './context'
+import Home from "./pages/Home"
+import ProjectPage from "./pages/ProjectPage"
+import AboutPage from "./pages/AboutPage"
 
 const fadeIn = keyframes`
   from { opacity: 0; }
@@ -15,12 +12,11 @@ const fadeIn = keyframes`
 
 const Pagina = styled.div`
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   font-family: "Plus Jakarta Sans", sans-serif;
   padding: 0;
   box-sizing: border-box;
   overflow-x: hidden;
-  overflow-y: auto;
   background-color: #000000;
 `
 
@@ -28,7 +24,7 @@ const Background = styled.div`
   width: 100%;
   padding: 0;
   box-sizing: border-box;
-  min-height: 100%;
+  min-height: 100vh;
   position: relative;
   isolation: isolate;
 
@@ -39,7 +35,7 @@ const Background = styled.div`
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    min-height: 100%;
     opacity: 0;
     animation: ${fadeIn} 3s ease-in-out forwards;
     z-index: -1;
@@ -61,22 +57,17 @@ const Background = styled.div`
 `
 
 function App() {
-  const { setTela } = useContext(MyContext)
-
-  useEffect(() => {
-    window.addEventListener("resize", () => setTela(window.innerWidth))
-    return () => window.removeEventListener("resize", () => setTela(window.innerWidth))
-  }, [])
-
   return (
     <Pagina>
       <Background>
         <Header />
-        <Hero />
-        <Projects />
-        <About />
-        <Contact />
-        <Footer />
+        <div style={{ paddingTop: '60px' }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projeto/:id" element={<ProjectPage />} />
+            <Route path="/sobre" element={<AboutPage />} />
+          </Routes>
+        </div>
       </Background>
     </Pagina>
   )

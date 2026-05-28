@@ -1,4 +1,5 @@
 import { useContext } from "react"
+import { useNavigate } from "react-router-dom"
 import styled, { keyframes } from "styled-components"
 import { MyContext } from "../../context"
 
@@ -119,7 +120,8 @@ const BtnSecondary = styled.button`
 `
 
 export default function Hero() {
-    const { cor2, cor3, scrollTo } = useContext(MyContext)
+    const { cor2, cor3 } = useContext(MyContext)
+    const navigate = useNavigate()
 
     return (
         <Secao id="hero">
@@ -138,10 +140,10 @@ export default function Hero() {
                     e faz diferença no dia a dia de uma distribuidora de produtos estéticos.
                 </Desc>
                 <CTA>
-                    <BtnPrimary color={cor3} onClick={() => scrollTo("projects")}>
+                    <BtnPrimary color={cor3} onClick={() => navigate("/#projects")}>
                         Ver Projetos
                     </BtnPrimary>
-                    <BtnSecondary color={cor3} onClick={() => scrollTo("contact")}>
+                    <BtnSecondary color={cor3} onClick={() => navigate("/#contact")}>
                         Entrar em Contato
                     </BtnSecondary>
                 </CTA>

@@ -1,6 +1,7 @@
+import { useContext } from "react"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import { MyContext } from "../../context"
-import { useContext } from "react"
 
 const Menu = styled.nav`
   display: flex;
@@ -17,6 +18,11 @@ const Menu = styled.nav`
     color: ${props => props.textColor};
   }
 
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
   li {
     cursor: pointer;
     position: relative;
@@ -24,6 +30,7 @@ const Menu = styled.nav`
     p {
       margin: 0;
       padding: 5px 0;
+      color: ${props => props.textColor};
     }
 
     &::after {
@@ -59,9 +66,7 @@ const BT = styled.li`
   transition: all 0.3s ease;
   border: 1px solid transparent;
 
-  &::after {
-    display: none !important;
-  }
+  &::after { display: none !important; }
 
   &:hover {
     background-color: transparent;
@@ -78,17 +83,39 @@ const BT = styled.li`
 `
 
 export default function Nav() {
-    const { nav, cor2, cor3, scrollTo } = useContext(MyContext)
-    return (
-        <Menu textColor={cor2}>
-            <ul>
-                {nav.map((e, i) => (
-                    <li key={`${i}-nav`} onClick={() => scrollTo(e.id)}>
-                        <p>{e.txt}</p>
-                    </li>
-                ))}
-                <BT BtColor={cor3} onClick={() => scrollTo("contact")}>Contato</BT>
-            </ul>
-        </Menu>
-    )
+  const { nav, cor2, cor3 } = useContext(MyContext)
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const handleNavClick = (to) => {
+    if (to === "/#projects" && location.pathname === "/") {
+      // Already on home, just scroll
+      const el = document.getElementById("projects")
+      if (el) el.scrollIntoView({ behavior: "smooth" })
+    } else if (to === "/#projects") {
+      // Navigate to home first, then scroll
+      navigate("/")
+      setTimeout(() => {
+        const el = document.getElementById("projects")
+        if (el) el.scrollIntoView({ behavior: "smooth" })
+      }, 100)
+    } else {
+      navigate(to)
+    }
+  }
+
+  return (
+    <Menu textColor={cor2}>
+      <ul>
+        {nav.map((e, i) => (
+          <li key={`${i}-nav`} onClick={() => handleNavClick(e.to)}>
+            <p>{e.txt}</p>
+          </li>
+        ))}
+        <BT BtColor={cor3} onClick={() => navigate("/")}>
+          Contato
+        </BT>
+      </ul>
+    </Menu>
+  )
 }

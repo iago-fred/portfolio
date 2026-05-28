@@ -7,61 +7,101 @@ const PROJECTS = [
         id: "il-dashboard",
         title: "IL Dashboard",
         tag: "Dashboard Executivo",
-        desc: "Dashboard em produção para gestão de vendas, operação e suprimentos de distribuidora de produtos estéticos. React 19 + Recharts + Vite + Vercel.",
-        tech: ["React", "Vite", "Recharts", "React Router", "Vercel"],
+        desc: "Dashboard em produção para gestão de vendas, operação e suprimentos de distribuidora de produtos estéticos.",
+        longDesc: "O IL Dashboard nasceu da necessidade real de unificar informações que antes ficavam espalhadas entre planilhas, mensagens no WhatsApp e anotações soltas. Hoje ele é a central de informações da distribuidora, com dados atualizados em tempo real.",
+        tech: ["React 19", "Vite 8", "Recharts", "React Router 7", "Vercel"],
         highlights: [
             "Gráficos interativos de vendas",
             "Previsão de demanda com Prophet (ML)",
             "1.097 produtos gerenciados",
             "Deploy automático na Vercel"
         ],
+        curiosidades: [
+            "📐 O layout foi inspirado em dashboards financeiros que eu usava no trabalho",
+            "🐛 Um bug do Recharts com Area components fazia o gráfico crashar com dados null — precisei fazer downgrade pra 2.15.4",
+            "⚡ O Vite 8 estava em alpha quando comecei — tive que atualizar o @vitejs/plugin-react pra v6",
+            "🎯 A previsão de demanda usa Prophet do Facebook, treinado com 49 dias de histórico",
+            "🚀 O deploy foi feito pela própria Neon (minha assistente IA) via Vercel CLI"
+        ],
         link: "https://il-dashboard-eight.vercel.app",
-        github: "https://github.com/iago-fred/IL-Dashboard"
+        github: "https://github.com/iago-fred/IL-Dashboard",
+        year: "2026",
+        role: "Desenvolvedor Fullstack"
     },
     {
         id: "il-separacao",
         title: "IL Separação",
         tag: "Sistema Logístico",
         desc: "Ecossistema completo para gestão de pedidos, separação, conferência e rotas de entrega — multiplataforma com app mobile para entregadores.",
-        tech: ["Node.js", "React", "React Native", "Python", "MongoDB"],
+        longDesc: "O IL Separação é a espinha dorsal da operação logística. Antes dele, a separação era feita no papel — pedido impresso, canetinha, e conferência manual. Hoje cada etapa é digital: do pedido no WhatsApp até a foto de comprovante na mão do entregador.",
+        tech: ["Node.js", "Express", "React", "React Native (Expo)", "Python FastAPI", "MongoDB", "Socket.IO", "Cloudinary"],
         highlights: [
             "Backend Node.js + Python (FastAPI)",
             "Frontend Web + Mobile (Expo)",
             "Socket.IO em tempo real",
             "4 entregadores em produção"
         ],
+        curiosidades: [
+            "📱 O app mobile dos entregadores foi feito em React Native com Expo e tem notificação push",
+            "📸 Cada entrega registra foto de comprovante via Cloudinary",
+            "🔊 Não é meu projeto original — dei manutenção e adicionei features como o dashboard",
+            "🗂️ Limpei o histórico de 31 commits bagunçados pra 10 commits organizados (force push incluso)",
+            "📦 O banco tem mais de 1.097 produtos, cada um com código de barras"
+        ],
         link: "https://il-separacao.vercel.app",
-        github: "https://github.com/iago-fred/IL-Separacao"
+        github: "https://github.com/iago-fred/IL-Separacao",
+        year: "2026",
+        role: "Desenvolvedor Fullstack"
     },
     {
         id: "secretary-il",
         title: "Secretary IL",
         tag: "Bot com IA",
         desc: "Bot inteligente que monitora grupos de WhatsApp e interpreta pedidos automaticamente, eliminando a digitação manual.",
-        tech: ["Node.js", "React", "WhatsApp Web"],
+        longDesc: "O Secretary IL veio de um problema real: os pedidos chegavam pelo WhatsApp e alguém precisava copiar manualmente pro sistema. Além de lento, tinha erro de digitação. O bot monitora os grupos, interpreta as mensagens e já cria o pedido no sistema.",
+        tech: ["Node.js", "React", "WhatsApp Web", "Puppeteer"],
         highlights: [
             "Automação de pedidos via WhatsApp",
             "Integração em tempo real",
             "Interpretação com IA",
             "Elimina digitação manual"
         ],
+        curiosidades: [
+            "🤖 O bot nasceu porque o Léo (funcionário da IL) mandava todos os pedidos por áudio no WhatsApp",
+            "📝 Antes do bot, alguém passava o dia digitando pedido por pedido",
+            "🐛 Já tentamos Baileys direto mas o IP da VPS era bloqueado pelo WhatsApp",
+            "💻 A solução final foi via WhatsApp Web com Chromium headless",
+            "⚡ Ele ainda convive com sessões que corrompem de vez em quando — mas entrega!"
+        ],
         link: null,
-        github: "https://github.com/iago-fred/secretary-il"
+        github: "https://github.com/iago-fred/secretary-il",
+        year: "2026",
+        role: "Desenvolvedor Fullstack"
     },
     {
         id: "lucas-vital",
         title: "Lucas R. Vital Advogados",
         tag: "Landing Page",
         desc: "Landing page para escritório de advocacia — meu primeiro projeto React, com design responsivo e carrossel customizado.",
-        tech: ["React", "Vite", "styled-components"],
+        longDesc: "Meu primeiro projeto React do zero. Uma landing page de apresentação para um escritório de advocacia, com carrossel de imagens, design responsivo e componentes estilizados. Foi o projeto que me ensinou hooks, styled-components e como funciona o deploy front-end.",
+        tech: ["React 19", "Vite", "styled-components"],
         highlights: [
             "Primeiro projeto React do zero",
             "Carrossel customizado",
             "Design responsivo",
             "Styled-components"
         ],
+        curiosidades: [
+            "🚀 Esse foi o projeto que me fez aprender React de verdade — literalmente do zero",
+            "🎠 O carrossel foi feito manualmente, sem biblioteca externa",
+            "📱 O design responsivo foi um dos maiores desafios (e aprendizados)",
+            "🎨 styled-components foi amor à primeira vista — uso até hoje",
+            "⭐ Foi meu primeiro deploy front-end, e ver no ar foi uma sensação incrível"
+        ],
         link: "https://lucas-vital-iago-fredericks-projects.vercel.app",
-        github: "https://github.com/iago-fred/lucas-vital"
+        github: "https://github.com/iago-fred/lucas-vital",
+        year: "2025",
+        role: "Desenvolvedor Fullstack"
     }
 ]
 
@@ -71,9 +111,9 @@ export function MyProvider({ children }) {
     const cor3 = "#58d851"
 
     const NAV_PAGS = [
-        { txt: "Home", id: "hero" },
-        { txt: "Trabalhos", id: "projects" },
-        { txt: "Sobre mim", id: "about" }
+        { txt: "Home", to: "/" },
+        { txt: "Trabalhos", to: "/#projects" },
+        { txt: "Sobre mim", to: "/sobre" }
     ]
 
     const [tela, setTela] = useState(
@@ -85,11 +125,14 @@ export function MyProvider({ children }) {
         if (el) el.scrollIntoView({ behavior: "smooth" })
     }
 
+    const getProject = (id) => PROJECTS.find(p => p.id === id)
+
     const value = {
         cor1, cor2, cor3,
         nav: NAV_PAGS,
         tela, setTela,
         projects: PROJECTS,
+        getProject,
         scrollTo
     }
 
