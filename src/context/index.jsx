@@ -23,9 +23,6 @@ const PROJECTS = [
             "🎯 A previsão de demanda usa Prophet do Facebook, treinado cada vez mais dias de histórico",
             "🚀 O deploy foi feito pela própria Neon (minha assistente IA) via Vercel CLI"
         ],
-        images: [
-            "/screenshots/il-dashboard-vendas.png",
-        ],
         link: "https://il-dashboard-eight.vercel.app",
         github: "https://github.com/iago-fred/IL-Dashboard",
         year: "2026",
@@ -49,9 +46,6 @@ const PROJECTS = [
             "📸 Cada entrega registra foto de comprovante via Cloudinary",
             "🔊 A aplicação inclui uma funcionalidade para compartilhar o status do pedido, o que resolveu um dos grandes problemas da empresa: a falta de transparência com os clientes.",
             "📦 O banco tem mais de 1.097 produtos cadastrados, cada um com código de barras"
-        ],
-        images: [
-            "/screenshots/il-separacao-1.svg",
         ],
         link: "https://il-separacao.vercel.app",
         github: "https://github.com/iago-fred/IL-Separacao",
@@ -77,9 +71,6 @@ const PROJECTS = [
             "💻 A solução final foi via WhatsApp Web com Chromium headless",
             "⚡ A grande sacada foi um dashboard de treinamento com feedbacks para a IA aprender a interpretar os pedidos"
         ],
-        images: [
-            "/screenshots/secretary-il-1.svg",
-        ],
         link: null,
         github: "https://github.com/iago-fred/secretary-il",
         year: "2026",
@@ -104,9 +95,6 @@ const PROJECTS = [
             "📱 O design responsivo foi um dos maiores desafios (e aprendizados)",
             "🎨 styled-components foi amor à primeira vista — uso até hoje",
             "⭐ Foi meu primeiro deploy front-end, e ver no ar foi uma sensação incrível"
-        ],
-        images: [
-            "/screenshots/lucas-vital-1.svg",
         ],
         link: "https://lucas-vital-iago-fredericks-projects.vercel.app",
         github: "https://github.com/iago-fred/lucas-vital",
