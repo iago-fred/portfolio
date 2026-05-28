@@ -30,7 +30,8 @@ const Back = styled(Link)`
 const Tag = styled.span`
     background-color: ${props => props.color}22;
     color: ${props => props.color};
-    padding: 4px 14px;
+    padding: 4px 8px;
+    margin-left: 8px;
     border-radius: 50px;
     font-size: 13px;
     font-weight: 600;

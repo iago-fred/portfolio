@@ -95,9 +95,14 @@ export default function Nav() {
   const location = useLocation()
 
   const handleNavClick = (e) => {
-    // Home always navigates to /
+    // Home always navigates to / and scrolls to hero
     if (e.txt === "Home") {
-      navigate("/")
+      if (location.pathname === "/") {
+        scrollToSection("hero")
+      } else {
+        navigate("/")
+        scrollToSection("hero")
+      }
       return
     }
 
@@ -132,7 +137,7 @@ export default function Nav() {
             <p>{e.txt}</p>
           </li>
         ))}
-        <BT BtColor={cor3} onClick={() => navigate("/#contact")}>
+        <BT BtColor={cor3} onClick={() => scrollToSection("contact")}>
           Contato
         </BT>
       </ul>

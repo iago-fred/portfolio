@@ -58,8 +58,9 @@ const Btn = styled.button`
     font-size: 15px;
     cursor: pointer;
     transition: all 0.3s ease;
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
 
     &:hover {

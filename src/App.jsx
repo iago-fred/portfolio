@@ -11,8 +11,8 @@ const fadeIn = keyframes`
 `
 
 const Pagina = styled.div`
-  width: 100vw;
-  min-height: 100vh;
+  width: auto;
+  min-height: auto;
   font-family: "Plus Jakarta Sans", sans-serif;
   padding: 0;
   box-sizing: border-box;

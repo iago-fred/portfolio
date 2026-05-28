@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import styled, { keyframes } from "styled-components"
 import { MyContext } from "../../context"
 import Nav from "../Nav"
@@ -67,11 +67,26 @@ const Logo = styled.div`
     gap: 6px;
 `
 
+function scrollToSection(id) {
+    setTimeout(() => {
+        const el = document.getElementById(id)
+        if (el) el.scrollIntoView({ behavior: "smooth" })
+    }, 150)
+}
+
 export default function Header() {
     const { cor1, cor2, cor3, tela } = useContext(MyContext)
     const navigate = useNavigate()
+    const location = useLocation()
 
-    const goHome = () => navigate("/")
+    const goHome = () => {
+        if (location.pathname === "/") {
+            scrollToSection("hero")
+        } else {
+            navigate("/")
+            scrollToSection("hero")
+        }
+    }
 
     if (tela >= 780) {
         return (

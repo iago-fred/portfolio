@@ -49,8 +49,8 @@ export default function Projects() {
     return (
         <Secao id="projects">
             <Content>
-                <Title color={cor2}>Projetos em <span style={{color: cor3}}>Produção</span></Title>
-                <Sub>Sistemas reais que rodam no dia a dia de uma distribuidora.</Sub>
+                <Title color={cor2}>Projetos em <span style={{ color: cor3 }}>Produção</span></Title>
+                <Sub>Sistemas reais que rodam no dia a dia.</Sub>
                 <Grid>
                     {projects.map(p => (
                         <ProjectCard key={p.id} project={p} />

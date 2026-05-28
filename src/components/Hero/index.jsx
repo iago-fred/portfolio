@@ -8,6 +8,13 @@ const fadeUp = keyframes`
     to { opacity: 1; transform: translateY(0); }
 `
 
+function scrollToSection(id) {
+    setTimeout(() => {
+        const el = document.getElementById(id)
+        if (el) el.scrollIntoView({ behavior: "smooth" })
+    }, 150)
+}
+
 const Secao = styled.section`
     width: 100%;
     min-height: 85vh;
@@ -46,7 +53,8 @@ const Name = styled.h1`
 const Role = styled.div`
     font-size: 18px;
     color: #94a3b8;
-    margin-bottom: 24px;
+    margin-top: 16px;
+    margin-bottom: 16px;
     display: flex;
     gap: 12px;
     justify-content: center;
@@ -104,10 +112,15 @@ const BtnSecondary = styled.button`
     font-size: 15px;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 
     &:hover {
         background-color: ${props => props.color}22;
         transform: translateY(-2px);
+        box-shadow: 0 0 15px ${props => props.color}44;
     }
 `
 
@@ -127,15 +140,15 @@ export default function Hero() {
                     <Tag color={cor3}>Supervisor de Operações</Tag>
                 </Role>
                 <Desc>
-                    Desenvolvedor fullstack disponível para criar sistemas web, dashboards, 
-                    APIs e automações. Atualmente também atuo como Supervisor de Operações 
+                    Desenvolvedor fullstack disponível para criar sistemas web, dashboards,
+                    APIs e automações. Atualmente também atuo como Supervisor de Operações
                     em uma distribuidora — onde eu mesmo crio as soluções que uso no dia a dia.
                 </Desc>
                 <CTA>
-                    <BtnPrimary color={cor3} onClick={() => navigate("/#projects")}>
+                    <BtnPrimary color={cor3} onClick={() => scrollToSection("projects")}>
                         Ver Projetos
                     </BtnPrimary>
-                    <BtnSecondary color={cor3} onClick={() => navigate("/#contact")}>
+                    <BtnSecondary color={cor3} onClick={() => scrollToSection("contact")}>
                         Entrar em Contato
                     </BtnSecondary>
                 </CTA>
