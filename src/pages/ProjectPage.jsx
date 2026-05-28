@@ -89,6 +89,40 @@ const Tech = styled.span`
     border: 1px solid rgba(255, 255, 255, 0.06);
 `
 
+const Gallery = styled.div`
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 16px;
+    margin-bottom: 40px;
+    scroll-snap-type: x mandatory;
+
+    &::-webkit-scrollbar {
+        height: 6px;
+    }
+    &::-webkit-scrollbar-track {
+        background: rgba(255,255,255,0.03);
+        border-radius: 3px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,0.1);
+        border-radius: 3px;
+    }
+`
+
+const GalleryImg = styled.img`
+    height: 320px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    scroll-snap-align: start;
+    transition: transform 0.3s, border-color 0.3s;
+
+    &:hover {
+        transform: scale(1.02);
+        border-color: ${props => props.color}66;
+    }
+`
+
 const HighlightList = styled.ul`
     list-style: none;
     padding: 0;
@@ -184,6 +218,23 @@ export default function ProjectPage() {
                 <span>{project.role}</span>
             </Meta>
             <Desc>{project.longDesc}</Desc>
+
+            {project.images && project.images.length > 0 && (
+                <>
+                    <SectionTitle color={cor3}>📸 Screenshots</SectionTitle>
+                    <Gallery>
+                        {project.images.map((img, i) => (
+                            <GalleryImg
+                                key={i}
+                                src={img}
+                                alt={`${project.title} screenshot ${i + 1}`}
+                                color={cor3}
+                                loading="lazy"
+                            />
+                        ))}
+                    </Gallery>
+                </>
+            )}
 
             <SectionTitle color={cor3}>🛠️ Stack</SectionTitle>
             <Techs>
