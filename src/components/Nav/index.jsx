@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import styled from "styled-components"
 import { MyContext } from "../../context"
 
@@ -82,25 +82,45 @@ const BT = styled.li`
   }
 `
 
+function scrollToSection(id) {
+  setTimeout(() => {
+    const el = document.getElementById(id)
+    if (el) el.scrollIntoView({ behavior: "smooth" })
+  }, 150)
+}
+
 export default function Nav() {
   const { nav, cor2, cor3 } = useContext(MyContext)
   const navigate = useNavigate()
   const location = useLocation()
 
-  const handleNavClick = (to) => {
-    if (to === "/#projects" && location.pathname === "/") {
-      // Already on home, just scroll
-      const el = document.getElementById("projects")
-      if (el) el.scrollIntoView({ behavior: "smooth" })
-    } else if (to === "/#projects") {
-      // Navigate to home first, then scroll
+  const handleNavClick = (e) => {
+    // Home always navigates to /
+    if (e.txt === "Home") {
       navigate("/")
-      setTimeout(() => {
-        const el = document.getElementById("projects")
-        if (el) el.scrollIntoView({ behavior: "smooth" })
-      }, 100)
-    } else {
-      navigate(to)
+      return
+    }
+
+    // Trabalhos -> scroll to #projects on home
+    if (e.txt === "Trabalhos") {
+      if (location.pathname === "/") {
+        scrollToSection("projects")
+      } else {
+        navigate("/")
+        scrollToSection("projects")
+      }
+      return
+    }
+
+    // Sobre mim -> scroll to #about-home on home
+    if (e.txt === "Sobre mim") {
+      if (location.pathname === "/") {
+        scrollToSection("about-home")
+      } else {
+        navigate("/")
+        scrollToSection("about-home")
+      }
+      return
     }
   }
 
@@ -108,11 +128,11 @@ export default function Nav() {
     <Menu textColor={cor2}>
       <ul>
         {nav.map((e, i) => (
-          <li key={`${i}-nav`} onClick={() => handleNavClick(e.to)}>
+          <li key={`${i}-nav`} onClick={() => handleNavClick(e)}>
             <p>{e.txt}</p>
           </li>
         ))}
-        <BT BtColor={cor3} onClick={() => navigate("/")}>
+        <BT BtColor={cor3} onClick={() => navigate("/#contact")}>
           Contato
         </BT>
       </ul>

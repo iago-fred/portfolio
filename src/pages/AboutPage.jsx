@@ -1,8 +1,8 @@
 import { useContext, useState } from "react"
 import { Link } from "react-router-dom"
-import Footer from "../components/Footer"
 import styled, { keyframes } from "styled-components"
 import { MyContext } from "../context"
+import Footer from "../components/Footer"
 
 const fadeUp = keyframes`
     from { opacity: 0; transform: translateY(30px); }
@@ -57,7 +57,6 @@ const Bio = styled.p`
     font-size: 16px;
     line-height: 1.9;
     margin: 0 0 20px 0;
-
     strong { color: ${props => props.color}; }
 `
 
@@ -154,21 +153,22 @@ export default function AboutPage() {
             <Sub>Um pouco da minha história, trabalho e o que me move.</Sub>
 
             <Section>
-                <SectionTitle color={cor2} spanColor={cor3}>👨‍💼 Quem <span>sou</span></SectionTitle>
+                <SectionTitle color={cor2} spanColor={cor3}>👨‍💻 Quem <span>sou</span></SectionTitle>
                 <Bio color={cor2}>
-                    Trabalho como <strong>Supervisor de Operações</strong> em uma distribuidora 
-                    de produtos estéticos em Salvador/BA. No dia a dia, cuido da gestão de estoque, 
-                    separação de pedidos, rotas de entrega e coordenação da equipe.
+                    Sou <strong>desenvolvedor fullstack</strong> com experiência em React, Node.js, 
+                    Python e MongoDB. Crio dashboards, sistemas web, APIs, landing pages e automações 
+                    — desde pequenos projetos até sistemas completos em produção.
                 </Bio>
                 <Bio color={cor2}>
-                    Paralelamente, sou <strong>desenvolvedor fullstack</strong> — crio sistemas que 
-                    resolvem problemas reais da empresa onde trabalho. Já construí desde dashboards 
-                    executivos (React + Recharts) até sistemas logísticos completos com backend 
-                    Node.js/Python, frontend web e mobile (React Native) e MongoDB.
+                    Profissionalmente, também atuo como <strong>Supervisor de Operações</strong> em 
+                    uma distribuidora de produtos estéticos em Salvador/BA. É na prática do dia a dia 
+                    que enxergo problemas reais e crio soluções de verdade — mas meu trabalho como 
+                    desenvolvedor vai muito além disso.
                 </Bio>
                 <Bio color={cor2}>
-                    Acredito que o melhor código é aquele que <strong>resolve um problema real</strong>. 
-                    Não tenho medo de botar a mão na massa, aprender na prática e fazer deploy em produção.
+                    Estou disponível para <strong>freelas, parcerias e projetos diversos</strong>. 
+                    Se você precisa de um sistema, um dashboard, uma API ou qualquer solução em código, 
+                    vamos conversar.
                 </Bio>
             </Section>
 
@@ -178,14 +178,14 @@ export default function AboutPage() {
                     period="Atualmente"
                     title="Supervisor / Gerente de Operações"
                     company="IL Produtos Estéticos"
-                    desc="Gestão de operações logísticas: estoque, separação, rotas de entrega e equipe."
+                    desc="Gestão de operações logísticas: estoque, separação, rotas de entrega e equipe. Também desenvolvo os sistemas internos da empresa."
                     color={cor3}
                 />
                 <ExpCardComp
                     period="2025 — Atualmente"
                     title="Desenvolvedor Fullstack"
                     company="Freelancer / Projetos Próprios"
-                    desc="Sistemas de logística, análises, projeções de demanda e faturamento. React, Node.js, Python, MongoDB."
+                    desc="Criação de dashboards, sistemas logísticos, landing pages, APIs e automações. React, Node.js, Python, MongoDB."
                     color={cor3}
                 />
             </Section>
@@ -198,7 +198,6 @@ export default function AboutPage() {
                     ))}
                 </Interesses>
             </Section>
-            <Footer />
         </Page>
     )
 }

@@ -4,14 +4,8 @@ import styled, { keyframes } from "styled-components"
 import { MyContext } from "../../context"
 
 const fadeUp = keyframes`
-    from {
-        opacity: 0;
-        transform: translateY(40px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
 `
 
 const Secao = styled.section`
@@ -46,9 +40,7 @@ const Name = styled.h1`
     line-height: 1.1;
     color: ${props => props.color};
     
-    span {
-        color: ${props => props.spanColor};
-    }
+    span { color: ${props => props.spanColor}; }
 `
 
 const Role = styled.div`
@@ -135,9 +127,9 @@ export default function Hero() {
                     <Tag color={cor3}>Supervisor de Operações</Tag>
                 </Role>
                 <Desc>
-                    Crio sistemas que resolvem problemas reais de logística, 
-                    estoque e gestão — código que <strong style={{color: cor2}}>roda em produção</strong> 
-                    e faz diferença no dia a dia de uma distribuidora de produtos estéticos.
+                    Desenvolvedor fullstack disponível para criar sistemas web, dashboards, 
+                    APIs e automações. Atualmente também atuo como Supervisor de Operações 
+                    em uma distribuidora — onde eu mesmo crio as soluções que uso no dia a dia.
                 </Desc>
                 <CTA>
                     <BtnPrimary color={cor3} onClick={() => navigate("/#projects")}>

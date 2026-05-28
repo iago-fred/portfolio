@@ -1,4 +1,5 @@
 import { useContext } from "react"
+import { useNavigate } from "react-router-dom"
 import styled, { keyframes } from "styled-components"
 import { MyContext } from "../../context"
 import Nav from "../Nav"
@@ -30,15 +31,16 @@ const Sec = styled.header`
     padding: 2px 30px;
     background-color: ${props => props.backgroundColor};
     color: ${props => props.fontColor};
-    
-    /* Mova o transform-origin para cá e garanta que ele seja aplicado */
     transform-origin: center top; 
-    
-    /* Use a animação */
     animation: ${showIn} 1s ease-in forwards;
 `
+
 const Nome = styled.h2`
     font-size: 25px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    
+    &:hover { opacity: 0.8; }
 
     span {
         color: ${props => props.spanColor};
@@ -46,12 +48,8 @@ const Nome = styled.h2`
 `
 
 const dashBlink = keyframes`
-    0%{
-        opacity: 0;
-    }
-    100%{
-        opacity: 1;
-    }
+    0%{ opacity: 0; }
+    100%{ opacity: 1; }
 `
 
 const Dash = styled.div`
@@ -69,16 +67,16 @@ const Logo = styled.div`
     gap: 6px;
 `
 
-
 export default function Header() {
     const { cor1, cor2, cor3, tela } = useContext(MyContext)
+    const navigate = useNavigate()
+
+    const goHome = () => navigate("/")
 
     if (tela >= 780) {
         return (
-            <Sec
-                backgroundColor={cor1}
-                fontColor={cor2}>
-                <Logo >
+            <Sec backgroundColor={cor1} fontColor={cor2}>
+                <Logo onClick={goHome} style={{ cursor: 'pointer' }}>
                     <Nome spanColor={cor3}>Iago<span>Frederick</span></Nome>
                     <Dash color={cor3} />
                 </Logo>
@@ -87,10 +85,8 @@ export default function Header() {
         )
     } else {
         return (
-            <Sec
-                backgroundColor={cor1}
-                fontColor={cor2}>
-                <Logo >
+            <Sec backgroundColor={cor1} fontColor={cor2}>
+                <Logo onClick={goHome} style={{ cursor: 'pointer' }}>
                     <Nome spanColor={cor3}>Iago<span>Frederick</span></Nome>
                     <Dash color={cor3} />
                 </Logo>

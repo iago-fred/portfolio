@@ -111,9 +111,9 @@ export function MyProvider({ children }) {
     const cor3 = "#58d851"
 
     const NAV_PAGS = [
-        { txt: "Home", to: "/" },
-        { txt: "Trabalhos", to: "/#projects" },
-        { txt: "Sobre mim", to: "/sobre" }
+        { txt: "Home", id: "home" },
+        { txt: "Trabalhos", id: "projects" },
+        { txt: "Sobre mim", id: "about" }
     ]
 
     const [tela, setTela] = useState(
