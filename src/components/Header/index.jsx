@@ -23,6 +23,8 @@ const Sec = styled.header`
     display: flex;
     flex-direction: row;
     align-items: center;
+    position: fixed;
+    z-index: 100;
     justify-content: space-between;
     box-sizing: border-box;
     padding: 2px 30px;
@@ -71,7 +73,7 @@ const Logo = styled.div`
 export default function Header() {
     const { cor1, cor2, cor3, tela } = useContext(MyContext)
 
-    if (tela >= 780){
+    if (tela >= 780) {
         return (
             <Sec
                 backgroundColor={cor1}

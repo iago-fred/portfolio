@@ -2,14 +2,22 @@ import { useState, useContext } from 'react'
 import styled from "styled-components"
 import { MyContext } from "../../context"
 
+const hexToRgba = (hex, alpha) => {
+    if (!hex) return `rgba(88, 216, 81, ${alpha})`;
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
 const CardBg = styled.div.attrs(props => ({
     style: {
         backgroundImage: props.$active
-            ? `radial-gradient(500px circle at ${props.$x}px ${props.$y}px, rgba(88,216,81,0.12), transparent 60%)`
+            ? `radial-gradient(500px circle at ${props.$x}px ${props.$y}px, ${hexToRgba(props.$borderColor, 0.12)}, transparent 60%)`
             : 'none',
     },
 }))`
-    background-color: #111111;
+    background-color: rgba(15, 23, 42, 0.527);
     border-radius: 14px;
     border: 1px solid rgba(255, 255, 255, 0.06);
     padding: 32px;

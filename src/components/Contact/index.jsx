@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import styled from "styled-components"
 import { MyContext } from "../../context"
 
@@ -41,26 +41,72 @@ const Grid = styled.div`
     flex-wrap: wrap;
 `
 
-const Card = styled.a`
+const hexToRgba = (hex, alpha) => {
+    if (!hex) return `rgba(88, 216, 81, ${alpha})`;
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+const Card = styled.a.attrs(props => ({
+    style: {
+        backgroundImage: props.$active
+            ? `radial-gradient(400px circle at ${props.$x}px ${props.$y}px, ${hexToRgba(props.$borderColor, 0.12)}, transparent 60%)`
+            : 'none',
+    },
+}))`
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    background-color: #111111;
+    background-color: rgba(15, 23, 42, 0.527);
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 14px;
     padding: 32px 40px;
     text-decoration: none;
     min-width: 200px;
-    transition: all 0.3s ease;
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
 
     &:hover {
-        border-color: ${props => props.color}66;
+        border-color: ${props => props.$borderColor};
         transform: translateY(-4px);
-        box-shadow: 0 0 30px ${props => props.color}22;
+        box-shadow: 0 0 30px ${props => props.$borderColor}22;
     }
 `
+
+function ContactCard({ href, target, color, children }) {
+    const [mouse, setMouse] = useState({ x: 0, y: 0, active: false })
+
+    const handleMouseMove = (e) => {
+        const rect = e.currentTarget.getBoundingClientRect()
+        setMouse({
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top,
+            active: true
+        })
+    }
+
+    const handleMouseLeave = () => setMouse(prev => ({ ...prev, active: false }))
+
+    return (
+        <Card
+            href={href}
+            target={target}
+            $x={mouse.x}
+            $y={mouse.y}
+            $active={mouse.active}
+            $borderColor={color}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+        >
+            {children}
+        </Card>
+    )
+}
 
 const Icon = styled.span`
     font-size: 36px;
@@ -87,16 +133,16 @@ export default function Contact() {
                 <Title color={cor2} spanColor={cor3}>Entre em <span>Contato</span></Title>
                 <Sub>Vamos conversar sobre projetos, ideias ou café ☕</Sub>
                 <Grid>
-                    <Card href="https://github.com/iago-fred" target="_blank" color={cor3}>
+                    <ContactCard href="https://github.com/iago-fred" target="_blank" color={cor3}>
                         <Icon>🐙</Icon>
                         <Label>GitHub</Label>
                         <Value color={cor2}>@iago-fred</Value>
-                    </Card>
-                    <Card href="mailto:iagofrederick.c@gmail.com" color={cor3}>
+                    </ContactCard>
+                    <ContactCard href="mailto:iagofrederick.c@gmail.com" color={cor3}>
                         <Icon>📧</Icon>
                         <Label>Email</Label>
                         <Value color={cor2}>iagofrederick.c@gmail.com</Value>
-                    </Card>
+                    </ContactCard>
                 </Grid>
             </Content>
         </Secao>

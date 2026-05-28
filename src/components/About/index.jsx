@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import styled from "styled-components"
 import { MyContext } from "../../context"
 
@@ -51,18 +51,67 @@ const TextBlock = styled.div`
     }
 `
 
-const ExpCard = styled.div`
-    background-color: #111111;
+const hexToRgba = (hex, alpha) => {
+    if (!hex) return `rgba(88, 216, 81, ${alpha})`;
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+const ExpCard = styled.div.attrs(props => ({
+    style: {
+        backgroundImage: props.$active
+            ? `radial-gradient(400px circle at ${props.$x}px ${props.$y}px, ${hexToRgba(props.$borderColor, 0.12)}, transparent 60%)`
+            : 'none',
+    },
+}))`
+    background-color: rgba(15, 23, 42, 0.527);
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 12px;
     padding: 24px;
+    cursor: default;
     margin-bottom: 16px;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
 
     &:hover {
-        border-color: ${props => props.color}44;
+        border-color: ${props => props.$borderColor};
+        transform: translateY(-4px);
     }
 `
+
+function ExperienceCard({ period, title, company, desc, color, cor2 }) {
+    const [mouse, setMouse] = useState({ x: 0, y: 0, active: false })
+
+    const handleMouseMove = (e) => {
+        const rect = e.currentTarget.getBoundingClientRect()
+        setMouse({
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top,
+            active: true
+        })
+    }
+
+    const handleMouseLeave = () => setMouse(prev => ({ ...prev, active: false }))
+
+    return (
+        <ExpCard
+            $x={mouse.x}
+            $y={mouse.y}
+            $active={mouse.active}
+            $borderColor={color}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+        >
+            <Period color={color}>{period}</Period>
+            <ExpTitle color={cor2}>{title}</ExpTitle>
+            <ExpCompany>{company}</ExpCompany>
+            <ExpDesc>{desc}</ExpDesc>
+        </ExpCard>
+    )
+}
 
 const Period = styled.div`
     font-size: 13px;
@@ -101,39 +150,38 @@ export default function About() {
                 <Grid>
                     <TextBlock color={cor2}>
                         <p>
-                            Trabalho como <strong>Supervisor de Operações</strong> em uma distribuidora 
-                            de produtos estéticos, onde também desenvolvo sistemas de logística, 
+                            Trabalho como <strong>Supervisor de Operações</strong> em uma distribuidora
+                            de produtos estéticos, onde também desenvolvo sistemas de logística,
                             análises e projeções que otimizam o dia a dia da empresa.
                         </p>
                         <p>
-                            Como desenvolvedor <strong>fullstack</strong>, construí desde dashboards 
-                            executivos (React + Recharts + Vercel) até sistemas logísticos completos 
-                            com backend em Node.js/Python, frontend web e mobile (React Native), 
+                            Como desenvolvedor <strong>fullstack</strong>, construí desde dashboards
+                            executivos (React + Recharts + Vercel) até sistemas logísticos completos
+                            com backend em Node.js/Python, frontend web e mobile (React Native),
                             e banco de dados MongoDB.
                         </p>
                         <p>
-                            Apaixonado por café, códigos que resolvem problemas reais, 
-                            e <strong style={{color: cor3}}>casando em 2027</strong> com a Jéssica 💍
+                            Apaixonado por café, códigos que resolvem problemas reais,
+                            e <strong style={{ color: cor3 }}>casando em 2027</strong> com a Jéssica 💍
                         </p>
                     </TextBlock>
                     <div>
-                        <ExpCard color={cor3}>
-                            <Period color={cor3}>Atualmente</Period>
-                            <ExpTitle color={cor2}>Supervisor / Gerente de Operações</ExpTitle>
-                            <ExpCompany>IL Produtos Estéticos</ExpCompany>
-                            <ExpDesc>
-                                Gestão de operações logísticas: estoque, separação, rotas de entrega e equipe.
-                            </ExpDesc>
-                        </ExpCard>
-                        <ExpCard color={cor3}>
-                            <Period color={cor3}>2025 — Atualmente</Period>
-                            <ExpTitle color={cor2}>Desenvolvedor Fullstack</ExpTitle>
-                            <ExpCompany>Freelancer / Projetos Próprios</ExpCompany>
-                            <ExpDesc>
-                                Sistemas de logística, análises, projeções de demanda e faturamento. 
-                                React, Node.js, Python, MongoDB.
-                            </ExpDesc>
-                        </ExpCard>
+                        <ExperienceCard
+                            period="Atualmente"
+                            title="Supervisor / Gerente de Operações"
+                            company="IL Produtos Estéticos"
+                            desc="Gestão de operações logísticas: estoque, separação, rotas de entrega e equipe."
+                            color={cor3}
+                            cor2={cor2}
+                        />
+                        <ExperienceCard
+                            period="2025 — Atualmente"
+                            title="Desenvolvedor Fullstack"
+                            company="Freelancer / Projetos Próprios"
+                            desc="Sistemas de logística, análises, projeções de demanda e faturamento. React, Node.js, Python, MongoDB."
+                            color={cor3}
+                            cor2={cor2}
+                        />
                     </div>
                 </Grid>
             </Content>
