@@ -66,7 +66,7 @@ const PROJECTS = [
             "Elimina digitação manual"
         ],
         curiosidades: [
-            "🤖 O bot nasceu porque o Lenadro (CTO da IL) mandava todos os pedidos pelo WhatsApp de forma extremamente orgânica e sem padrão, o que agilizava a venda mas gerava muitos erros",
+            "🤖 O bot nasceu porque o Leandro (CTO da IL) mandava todos os pedidos pelo WhatsApp de forma extremamente orgânica e sem padrão, o que agilizava a venda mas gerava muitos erros",
             "📝 Antes do bot, alguém passava o dia digitando pedido por pedido",
             "💻 A solução final foi via WhatsApp Web com Chromium headless",
             "⚡ A grande sacada foi um dashboard de treinamento com feedbacks para a IA aprender a interpretar os pedidos"

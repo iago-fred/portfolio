@@ -129,6 +129,16 @@ export default function Nav() {
     }
   }
 
+  // Contato -> sempre leva à seção de contato (na Home)
+  const handleContactClick = () => {
+    if (location.pathname === "/") {
+      scrollToSection("contact")
+    } else {
+      navigate("/")
+      scrollToSection("contact")
+    }
+  }
+
   return (
     <Menu textColor={cor2}>
       <ul>
@@ -137,7 +147,7 @@ export default function Nav() {
             <p>{e.txt}</p>
           </li>
         ))}
-        <BT BtColor={cor3} onClick={() => scrollToSection("contact")}>
+        <BT BtColor={cor3} onClick={handleContactClick}>
           Contato
         </BT>
       </ul>
