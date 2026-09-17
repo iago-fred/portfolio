@@ -47,6 +47,13 @@ const PROJECTS = [
             "🔊 A aplicação inclui uma funcionalidade para compartilhar o status do pedido, o que resolveu um dos grandes problemas da empresa: a falta de transparência com os clientes.",
             "📦 O banco tem mais de 1.097 produtos cadastrados, cada um com código de barras"
         ],
+        screenshots: [
+            { src: "/projeto/il-separacao/app/01-login.jpg", caption: "Login do entregador", hint: "Acesso individual por login/senha" },
+            { src: "/projeto/il-separacao/app/02-rotas.jpg", caption: "Rotas do dia", hint: "Total de fretes e entregas do dia" },
+            { src: "/projeto/il-separacao/app/03-detalhes-rota.jpg", caption: "Detalhes da rota", hint: "Paradas da rota em sequência" },
+            { src: "/projeto/il-separacao/app/04-detalhes-entrega.jpg", caption: "Detalhes da entrega", hint: "Cliente, endereço e ação de copiar" },
+            { src: "/projeto/il-separacao/app/05-finalizar-entrega.jpg", caption: "Finalizar entrega", hint: "Confirmação com foto de comprovante" }
+        ],
         link: "https://il-separacao.vercel.app",
         github: "https://github.com/iago-fred/IL-Separacao",
         year: "2026",

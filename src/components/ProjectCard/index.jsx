@@ -67,6 +67,20 @@ const Techs = styled.div`
     margin-bottom: 20px;
 `
 
+const Shots = styled.div`
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+`
+
+const ShotThumb = styled.img`
+    width: 46px;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background-color: #000;
+`
+
 const Tech = styled.span`
     background-color: rgba(255, 255, 255, 0.05);
     color: #94a3b8;
@@ -165,6 +179,13 @@ export default function ProjectCard({ project }) {
             <Tag color={cor3}>{project.tag}</Tag>
             <Title color="#e2e2e2">{project.title}</Title>
             <Desc>{project.desc}</Desc>
+            {project.screenshots && project.screenshots.length > 0 && (
+                <Shots>
+                    {project.screenshots.slice(0, 3).map((s, i) => (
+                        <ShotThumb key={i} src={s.src} alt="" loading="lazy" />
+                    ))}
+                </Shots>
+            )}
             <Techs>
                 {project.tech.map(t => (
                     <Tech key={t}>{t}</Tech>

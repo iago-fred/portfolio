@@ -1,5 +1,6 @@
 import { useContext, useState } from "react"
 import Footer from "../components/Footer"
+import AppGallery from "../components/AppGallery"
 import { useParams, Link } from "react-router-dom"
 import styled, { keyframes } from "styled-components"
 import { MyContext } from "../context"
@@ -184,6 +185,13 @@ export default function ProjectPage() {
                 <span>{project.role}</span>
             </Meta>
             <Desc>{project.longDesc}</Desc>
+
+            {project.screenshots && project.screenshots.length > 0 && (
+                <>
+                    <SectionTitle color={cor3}>📱 O app dos entregadores</SectionTitle>
+                    <AppGallery screens={project.screenshots} color={cor3} />
+                </>
+            )}
 
             <SectionTitle color={cor3}>🛠️ Stack</SectionTitle>
             <Techs>
