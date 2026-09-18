@@ -60,6 +60,45 @@ const Bio = styled.p`
     strong { color: ${props => props.color}; }
 `
 
+const QuemSou = styled.div`
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+    margin-bottom: 4px;
+
+    @media (max-width: 680px) {
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+    }
+`
+
+const FotoWrap = styled.div`
+    flex: 0 0 240px;
+    width: 240px;
+    border-radius: 18px;
+    overflow: hidden;
+    background-color: #0b0b0b;
+    border: 1px solid ${props => props.color}55;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 40px ${props => props.color}22;
+
+    @media (max-width: 680px) {
+        flex-basis: 220px;
+        width: 220px;
+    }
+`
+
+const Foto = styled.img`
+    display: block;
+    width: 100%;
+    height: auto;
+`
+
+const BioCol = styled.div`
+    flex: 1 1 auto;
+    min-width: 0;
+`
+
 const hexToRgba = (hex, alpha) => {
     if (!hex) return `rgba(88, 216, 81, ${alpha})`
     const r = parseInt(hex.slice(1, 3), 16)
@@ -154,6 +193,11 @@ export default function AboutPage() {
 
             <Section>
                 <SectionTitle color={cor2} spanColor={cor3}>👨‍💻 Quem <span>sou</span></SectionTitle>
+                <QuemSou>
+                    <FotoWrap color={cor3}>
+                        <Foto src="/sobre/iago.jpg" alt="Iago Frederick Cardoso" loading="lazy" />
+                    </FotoWrap>
+                    <BioCol>
                 <Bio color={cor2}>
                     Sou <strong>desenvolvedor fullstack</strong> com experiência em React, Node.js, 
                     Python e MongoDB. Crio dashboards, sistemas web, APIs, landing pages e automações 
@@ -170,6 +214,8 @@ export default function AboutPage() {
                     Se você precisa de um sistema, um dashboard, uma API ou qualquer solução em código, 
                     vamos conversar.
                 </Bio>
+                    </BioCol>
+                </QuemSou>
             </Section>
 
             <Section>
