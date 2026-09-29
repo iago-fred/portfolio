@@ -124,7 +124,7 @@ const PROJECTS = [
         screenshotsTitle: "🖥️ O painel de treinamento",
         screenshots: [
             { src: "/projeto/secretary-il/01-login.jpg", caption: "Acesso ao painel", hint: "Senha única de entrada" },
-            { src: "/projeto/secretary-il/04-whatsapp.jpg", caption: "Conexão do WhatsApp", hint: "Sessão conectada por QR" },
+            { src: "/projeto/secretary-il/04-conexao.jpg", caption: "Conexão do WhatsApp", hint: "Sessão ativa por QR (número protegido)" },
             { src: "/projeto/secretary-il/03-config.jpg", caption: "Configurações", hint: "Parâmetros reais e regras de envio" }
         ],
         link: null,
