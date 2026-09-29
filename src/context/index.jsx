@@ -63,8 +63,8 @@ const PROJECTS = [
         id: "secretary-il",
         title: "Secretary IL",
         tag: "Bot com IA",
-        desc: "Bot que lê pedidos do WhatsApp, interpreta as mensagens com IA e cria o pedido automaticamente no sistema — com um painel de treinamento com feedback humano.",
-        longDesc: "O Secretary IL nasceu de um problema real: os pedidos chegavam pelo WhatsApp de forma orgânica e sem padrão, e alguém precisava interpretar e digitar tudo no sistema — lento e sujeito a erro de digitação. O bot monitora as conversas, entende a mensagem escrita 'do jeito que o cliente fala' com um LLM, casa os produtos com o catálogo do sistema e cria o pedido sozinho. E quando a IA erra, o humano corrige no painel — e o bot aprende com isso.",
+        desc: "Sistema que lê pedidos no WhatsApp, interpreta com IA, casa os produtos com o catálogo do ERP e cria o pedido — com um painel onde o humano ensina a IA.",
+        longDesc: "O Secretary IL nasceu de um problema operacional bem concreto: os pedidos chegavam pelo WhatsApp de forma totalmente orgânica — sem padrão, com gírias, abreviações e nomes de produto 'do jeito que o cliente fala'. Alguém precisava ler a conversa, interpretar e digitar tudo no sistema. Era lento e, principalmente, gerava erro de digitação.\n\nA ideia foi tirar o humano da digitação — mas mantê-lo no comando. O bot lê a conversa em tempo real, entende a mensagem com IA, casa cada produto com o catálogo oficial e cria o pedido automaticamente. Quando a IA erra, o treinador corrige num painel e explica o porquê — e o bot aprende com essa correção.\n\nMais do que um 'bot de WhatsApp', é um sistema de aprendizado supervisionado aplicado a um problema real de operação: a máquina faz o trabalho pesado, o humano só valida o que importa.",
         tech: ["Node.js", "Baileys", "Python (FastAPI)", "React 19", "PostgreSQL", "CrewAI + LLM", "WebSocket", "Docker"],
         highlights: [
             "Leitura do WhatsApp via Baileys (sessão multi-dispositivo, pareamento por QR)",
@@ -74,6 +74,28 @@ const PROJECTS = [
             "Envio automático ao sistema por faixa de precisão, com idempotência (sem pedido duplicado)",
             "Painel web em tempo real para treinar, revisar e configurar"
         ],
+        problema: [
+            "Os pedidos chegavam no WhatsApp sem padrão: gírias, abreviações e nomes de produto do dia a dia",
+            "Alguém precisava interpretar e digitar tudo manualmente — lento e sujeito a erro",
+            "Não existia ponte entre a conversa e o sistema real de pedidos",
+            "Qualquer automação 'burra' (regex) quebraria na primeira variação de escrita"
+        ],
+        comoFunciona: [
+            "Captura — um número dedicado entra como dispositivo conectado (pareamento por QR, com sessão persistida). Cada mensagem nova reinicia um timer curto que agrupa o 'bloco' de mensagens antes de interpretar.",
+            "Interpretação — o histórico vira o texto de entrada; um seletor busca no banco de exemplos os casos mais parecidos (similaridade léxica + diversidade) e um LLM devolve o pedido estruturado em JSON.",
+            "Casamento — cada produto citado é comparado com TODO o catálogo; o bot escolhe a maior probabilidade de equivalência e, quando fica ambíguo, NÃO chuta: sinaliza para o humano.",
+            "Validação — o painel mostra o JSON extraído; o treinador marca certo/errado e escreve uma observação. O pedido aprovado é criado no sistema.",
+            "Aprendizado — a observação é interpretada pela IA e vira uma regra (apelido de produto). A cada correção, o bot fica melhor."
+        ],
+        decisoes: [
+            { titulo: "Um único caminho de entrada", texto: "O canal não-oficial (Baileys) e a API oficial da Meta alimentam o MESMO pipeline. Trocar de canal não mexe em nenhuma outra parte — dá pra migrar sem reescrever nada." },
+            { titulo: "Humano no meio, não no lugar", texto: "A IA propõe, o humano supervisiona. Em vez de confiar cegamente no modelo, o treino é few-shot dinâmico: os exemplos mais parecidos (e os erros parecidos) entram como contexto a cada leitura." },
+            { titulo: "Recuperação sem RAG vetorial", texto: "Seleção de exemplos por BM25 (léxico) + controle de proporção erradas:corretas + MMR (diversidade) + fallback de recência. Simples, barato e eficaz para mensagens curtas de pedido." },
+            { titulo: "Casamento por probabilidade, com saída segura", texto: "Score com tokens (tolerando abreviação), números (dose) e o detalhe decisivo 'com/sem' (ex.: vasoconstritor). Abaixo da confiança ou empate técnico → o humano decide. Melhor não enviar do que enviar errado." },
+            { titulo: "Anti-duplicação no envio", texto: "O envio ao sistema é idempotente e persistido: a mesma referência nunca vira dois pedidos, mesmo reiniciando o serviço no meio. Se falhar, o pedido fica pendente e tenta de novo." },
+            { titulo: "Operação pensada para migrar", texto: "Tudo em Docker (API + WhatsApp + banco + painel), acesso por senha e parâmetros de produção editáveis na própria interface." }
+        ],
+        resultado: "Antes: alguém digitando pedido por pedido, com erro. Depois: o bot interpreta a conversa e cria o pedido, e o humano só valida e ensina. Menos erro, menos retrabalho e um bot que melhora continuamente com o feedback real do time.",
         curiosidades: [
             "🤖 O bot nasceu porque os pedidos chegavam no WhatsApp sem padrão nenhum — rápido pra vender, mas cheio de erro de digitação",
             "🧠 A grande sacada foi colocar o humano no meio: um painel onde o treinador marca ✅/❌ e explica o erro, e a IA aprende com o exemplo",
@@ -87,7 +109,8 @@ const PROJECTS = [
         screenshots: [
             { src: "/projeto/secretary-il/01-login.jpg", caption: "Acesso ao painel", hint: "Senha única de entrada" },
             { src: "/projeto/secretary-il/02-treino.jpg", caption: "Validação da leitura", hint: "JSON extraído para o treinador validar" },
-            { src: "/projeto/secretary-il/03-config.jpg", caption: "Configurações", hint: "Parâmetros reais e regras de envio" }
+            { src: "/projeto/secretary-il/03-config.jpg", caption: "Configurações", hint: "Parâmetros reais e regras de envio" },
+            { src: "/projeto/secretary-il/04-whatsapp.jpg", caption: "Conexão do WhatsApp", hint: "Sessão conectada por QR" }
         ],
         link: null,
         github: null,
