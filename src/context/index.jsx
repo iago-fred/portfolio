@@ -63,23 +63,34 @@ const PROJECTS = [
         id: "secretary-il",
         title: "Secretary IL",
         tag: "Bot com IA",
-        desc: "Bot inteligente que monitora grupos de WhatsApp e interpreta pedidos automaticamente, eliminando a digitação manual.",
-        longDesc: "O Secretary IL veio de um problema real: os pedidos chegavam pelo WhatsApp e alguém precisava copiar manualmente pro sistema. Além de lento, tinha erro de digitação. O bot monitora os grupos, interpreta as mensagens e já cria o pedido no sistema.",
-        tech: ["Node.js", "React", "WhatsApp Web", "Puppeteer"],
+        desc: "Bot que lê pedidos do WhatsApp, interpreta as mensagens com IA e cria o pedido automaticamente no sistema — com um painel de treinamento com feedback humano.",
+        longDesc: "O Secretary IL nasceu de um problema real: os pedidos chegavam pelo WhatsApp de forma orgânica e sem padrão, e alguém precisava interpretar e digitar tudo no sistema — lento e sujeito a erro de digitação. O bot monitora as conversas, entende a mensagem escrita 'do jeito que o cliente fala' com um LLM, casa os produtos com o catálogo do sistema e cria o pedido sozinho. E quando a IA erra, o humano corrige no painel — e o bot aprende com isso.",
+        tech: ["Node.js", "Baileys", "Python (FastAPI)", "React 19", "PostgreSQL", "CrewAI + LLM", "WebSocket", "Docker"],
         highlights: [
-            "Automação de pedidos via WhatsApp",
-            "Integração em tempo real",
-            "Interpretação com IA",
-            "Elimina digitação manual"
+            "Leitura do WhatsApp via Baileys (sessão multi-dispositivo, pareamento por QR)",
+            "Extração de pedidos com LLM, com validação de esquema e dos campos",
+            "Treino supervisionado: exemplos ✅/❌ + seleção por BM25 e MMR",
+            "Casamento de produtos com o catálogo por probabilidade, com apelidos ensinados pelo humano",
+            "Envio automático ao sistema por faixa de precisão, com idempotência (sem pedido duplicado)",
+            "Painel web em tempo real para treinar, revisar e configurar"
         ],
         curiosidades: [
-            "🤖 O bot nasceu porque o Leandro (CTO da IL) mandava todos os pedidos pelo WhatsApp de forma extremamente orgânica e sem padrão, o que agilizava a venda mas gerava muitos erros",
-            "📝 Antes do bot, alguém passava o dia digitando pedido por pedido",
-            "💻 A solução final foi via WhatsApp Web com Chromium headless",
-            "⚡ A grande sacada foi um dashboard de treinamento com feedbacks para a IA aprender a interpretar os pedidos"
+            "🤖 O bot nasceu porque os pedidos chegavam no WhatsApp sem padrão nenhum — rápido pra vender, mas cheio de erro de digitação",
+            "🧠 A grande sacada foi colocar o humano no meio: um painel onde o treinador marca ✅/❌ e explica o erro, e a IA aprende com o exemplo",
+            "🔎 O matching de produto compara a mensagem com TODO o catálogo e escolhe a maior probabilidade — e quando fica ambíguo, ele NÃO chuta: chama o treinador",
+            "📚 Se o treinador escreve uma explicação (ex.: 'esse nome é o mesmo que X'), o bot aprende semanticamente aquele apelido",
+            "🐳 Roda 100% em Docker (API + WhatsApp + banco + painel), pensado pra migrar de servidor sem dor",
+            "🔐 Acesso protegido por senha única e envio idempotente (não duplica pedido, mesmo reiniciando o serviço)"
+        ],
+        screenshotsKind: "web",
+        screenshotsTitle: "🖥️ O painel de treinamento",
+        screenshots: [
+            { src: "/projeto/secretary-il/01-login.jpg", caption: "Acesso ao painel", hint: "Senha única de entrada" },
+            { src: "/projeto/secretary-il/02-treino.jpg", caption: "Validação da leitura", hint: "JSON extraído para o treinador validar" },
+            { src: "/projeto/secretary-il/03-config.jpg", caption: "Configurações", hint: "Parâmetros reais e regras de envio" }
         ],
         link: null,
-        github: "https://github.com/iago-fred/secretary-il",
+        github: null,
         year: "2026",
         role: "Desenvolvedor Fullstack"
     },

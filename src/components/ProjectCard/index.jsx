@@ -74,7 +74,7 @@ const Shots = styled.div`
 `
 
 const ShotThumb = styled.img`
-    width: 46px;
+    width: ${props => (props.$wide ? '86px' : '46px')};
     height: auto;
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -182,7 +182,7 @@ export default function ProjectCard({ project }) {
             {project.screenshots && project.screenshots.length > 0 && (
                 <Shots>
                     {project.screenshots.slice(0, 3).map((s, i) => (
-                        <ShotThumb key={i} src={s.src} alt="" loading="lazy" />
+                        <ShotThumb key={i} src={s.src} alt="" loading="lazy" $wide={project.screenshotsKind === 'web'} />
                     ))}
                 </Shots>
             )}
@@ -202,9 +202,11 @@ export default function ProjectCard({ project }) {
                         🔗 Acessar
                     </Link>
                 )}
-                <Link href={project.github} target="_blank" rel="noopener noreferrer" color={cor3}>
-                    💻 GitHub
-                </Link>
+                {project.github && (
+                    <Link href={project.github} target="_blank" rel="noopener noreferrer" color={cor3}>
+                        💻 GitHub
+                    </Link>
+                )}
             </Links>
             <ViewMore color={cor3}>📖 Ver página completa do projeto →</ViewMore>
         </CardBg>

@@ -1,6 +1,7 @@
 import { useContext, useState } from "react"
 import Footer from "../components/Footer"
 import AppGallery from "../components/AppGallery"
+import WebGallery from "../components/WebGallery"
 import { useParams, Link } from "react-router-dom"
 import styled, { keyframes } from "styled-components"
 import { MyContext } from "../context"
@@ -188,8 +189,10 @@ export default function ProjectPage() {
 
             {project.screenshots && project.screenshots.length > 0 && (
                 <>
-                    <SectionTitle color={cor3}>📱 O app dos entregadores</SectionTitle>
-                    <AppGallery screens={project.screenshots} color={cor3} />
+                    <SectionTitle color={cor3}>{project.screenshotsTitle || "📱 O app dos entregadores"}</SectionTitle>
+                    {project.screenshotsKind === 'web'
+                        ? <WebGallery screens={project.screenshots} color={cor3} />
+                        : <AppGallery screens={project.screenshots} color={cor3} />}
                 </>
             )}
 
@@ -220,9 +223,11 @@ export default function ProjectPage() {
                         🔗 Acessar Projeto
                     </LinkBtn>
                 )}
-                <LinkBtn href={project.github} target="_blank" color={cor3}>
-                    💻 Ver Código no GitHub
-                </LinkBtn>
+                {project.github && (
+                    <LinkBtn href={project.github} target="_blank" color={cor3}>
+                        💻 Ver Código no GitHub
+                    </LinkBtn>
+                )}
             </Links>
             <Footer />
         </Page>
