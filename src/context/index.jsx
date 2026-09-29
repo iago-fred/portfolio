@@ -80,12 +80,28 @@ const PROJECTS = [
             "Não existia ponte entre a conversa e o sistema real de pedidos",
             "Qualquer automação 'burra' (regex) quebraria na primeira variação de escrita"
         ],
+        problemaImagem: {
+            src: "/projeto/secretary-il/05-conversa.jpg",
+            caption: "Exemplo (fictício) de como o pedido chegava: gíria, produto abreviado, endereço 'de sempre' e um '40 ✅' no meio da conversa."
+        },
         comoFunciona: [
             "Captura — um número dedicado entra como dispositivo conectado (pareamento por QR, com sessão persistida). Cada mensagem nova reinicia um timer curto que agrupa o 'bloco' de mensagens antes de interpretar.",
-            "Interpretação — o histórico vira o texto de entrada; um seletor busca no banco de exemplos os casos mais parecidos (similaridade léxica + diversidade) e um LLM devolve o pedido estruturado em JSON.",
+            {
+                texto: "Interpretação — o histórico vira o texto de entrada; um seletor busca no banco de exemplos os casos mais parecidos (similaridade léxica + diversidade) e um LLM devolve o pedido estruturado em JSON.",
+                img: "/projeto/secretary-il/02-treino.jpg",
+                caption: "A leitura vira JSON no painel, pronto pra validação do treinador."
+            },
             "Casamento — cada produto citado é comparado com TODO o catálogo; o bot escolhe a maior probabilidade de equivalência e, quando fica ambíguo, NÃO chuta: sinaliza para o humano.",
-            "Validação — o painel mostra o JSON extraído; o treinador marca certo/errado e escreve uma observação. O pedido aprovado é criado no sistema.",
-            "Aprendizado — a observação é interpretada pela IA e vira uma regra (apelido de produto). A cada correção, o bot fica melhor."
+            {
+                texto: "Validação — o painel mostra o JSON extraído; o treinador marca certo/errado e escreve uma observação. O pedido aprovado é criado no sistema.",
+                img: "/projeto/secretary-il/07-exemplo-detalhe.jpg",
+                caption: "Cada treino guarda o texto original e o JSON esperado — dá pra auditar e corrigir depois."
+            },
+            {
+                texto: "Aprendizado — a observação é interpretada pela IA e vira uma regra (apelido de produto). A cada correção, o bot fica melhor.",
+                img: "/projeto/secretary-il/06-exemplos.jpg",
+                caption: "A base de treino cresce com o uso — e dá pra excluir um exemplo enviado errado."
+            }
         ],
         decisoes: [
             { titulo: "Um único caminho de entrada", texto: "O canal não-oficial (Baileys) e a API oficial da Meta alimentam o MESMO pipeline. Trocar de canal não mexe em nenhuma outra parte — dá pra migrar sem reescrever nada." },
@@ -108,9 +124,8 @@ const PROJECTS = [
         screenshotsTitle: "🖥️ O painel de treinamento",
         screenshots: [
             { src: "/projeto/secretary-il/01-login.jpg", caption: "Acesso ao painel", hint: "Senha única de entrada" },
-            { src: "/projeto/secretary-il/02-treino.jpg", caption: "Validação da leitura", hint: "JSON extraído para o treinador validar" },
-            { src: "/projeto/secretary-il/03-config.jpg", caption: "Configurações", hint: "Parâmetros reais e regras de envio" },
-            { src: "/projeto/secretary-il/04-whatsapp.jpg", caption: "Conexão do WhatsApp", hint: "Sessão conectada por QR" }
+            { src: "/projeto/secretary-il/04-whatsapp.jpg", caption: "Conexão do WhatsApp", hint: "Sessão conectada por QR" },
+            { src: "/projeto/secretary-il/03-config.jpg", caption: "Configurações", hint: "Parâmetros reais e regras de envio" }
         ],
         link: null,
         github: null,

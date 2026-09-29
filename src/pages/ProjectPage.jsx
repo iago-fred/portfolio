@@ -138,6 +138,10 @@ const CuriosidadeText = styled.p`
     margin: 0;
 `
 
+const StepBody = styled.div`
+    min-width: 0;
+`
+
 const Step = styled.li`
     color: #cbd5e1;
     font-size: 15px;
@@ -214,6 +218,27 @@ const ResultadoText = styled.p`
     margin: 0;
 `
 
+const InlineShot = styled.figure`
+    margin: 14px 0 30px 0;
+    max-width: 560px;
+`
+
+const InlineImg = styled.img`
+    width: 100%;
+    display: block;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+    background-color: #000;
+`
+
+const InlineCap = styled.figcaption`
+    margin-top: 8px;
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.5;
+`
+
 const Links = styled.div`
     display: flex;
     gap: 16px;
@@ -272,6 +297,12 @@ export default function ProjectPage() {
                             <HighlightItem key={i} color={cor3}>{p}</HighlightItem>
                         ))}
                     </HighlightList>
+                    {project.problemaImagem && (
+                        <InlineShot>
+                            <InlineImg src={project.problemaImagem.src} alt={project.problemaImagem.caption || ""} loading="lazy" />
+                            {project.problemaImagem.caption && <InlineCap>{project.problemaImagem.caption}</InlineCap>}
+                        </InlineShot>
+                    )}
                 </>
             )}
 
@@ -288,9 +319,23 @@ export default function ProjectPage() {
                 <>
                     <SectionTitle color={cor3}>⚙️ Como funciona</SectionTitle>
                     <StepList>
-                        {project.comoFunciona.map((s, i) => (
-                            <Step key={i} color={cor3} data-n={i + 1}>{s}</Step>
-                        ))}
+                        {project.comoFunciona.map((s, i) => {
+                            const texto = typeof s === 'string' ? s : s.texto
+                            const shot = typeof s === 'string' ? null : s
+                            return (
+                                <Step key={i} color={cor3} data-n={i + 1}>
+                                    <StepBody>
+                                        {texto}
+                                        {shot && shot.img && (
+                                            <InlineShot>
+                                                <InlineImg src={shot.img} alt={shot.caption || ''} loading="lazy" />
+                                                {shot.caption && <InlineCap>{shot.caption}</InlineCap>}
+                                            </InlineShot>
+                                        )}
+                                    </StepBody>
+                                </Step>
+                            )
+                        })}
                     </StepList>
                 </>
             )}
